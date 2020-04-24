@@ -35,11 +35,10 @@ class Complex_num
 
     def self.bulk_multiply(arr)
         @@bulk_multiply_count += 1
-        bulkMultipliedCn = Complex_num.new(1,1)
-        arr.each do |obj| 
+        bulkMultipliedCn = arr.first
+        arr.drop(1).each {|obj| 
             bulkMultipliedCn =  bulkMultipliedCn * obj 
-        end
-# puts complex2.bulk_multiply([complex1,complex2]).inspect
+        }
         bulkMultipliedCn 
     end
 
