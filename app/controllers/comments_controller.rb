@@ -1,5 +1,5 @@
 class CommentsController < ApplicationController
-    # before_action :authenticate_user!
+    before_action :authenticate_user!
     load_and_authorize_resource
 
     # http_basic_authenticate_with name: "dhh", password: "secret", only: :destroy
