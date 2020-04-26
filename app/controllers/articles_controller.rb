@@ -1,7 +1,10 @@
 class ArticlesController < ApplicationController
      
-  http_basic_authenticate_with name: "dhh", password: "secret", except: [:index, :show]
-  
+  # http_basic_authenticate_with name: "dhh", password: "secret", except: [:index, :show]
+  # before_action :authenticate_user!, except: [:index, :show]
+  # @articles = Article.accessible_by(current_ability)
+  load_and_authorize_resource
+
     def index
       @articles = Article.all
     end
@@ -20,7 +23,8 @@ class ArticlesController < ApplicationController
    
     def create
       @article = Article.new(article_params)
-   
+      # abort current_user.id.inspect
+      @article.user_id = current_user.id
       if @article.save
         redirect_to @article
       else
@@ -47,6 +51,6 @@ class ArticlesController < ApplicationController
    
     private
       def article_params
-        params.require(:article).permit(:title, :text)
+        params.require(:article).permit(:title, :text, )
       end
 end
